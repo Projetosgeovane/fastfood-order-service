@@ -26,6 +26,8 @@
     "@prisma/client": "^5.13.0",
     "aws-lambda": "^1.0.7",
     "aws-serverless-express": "^3.4.0",
+    "axios": "^1.6.8",
+    "mongodb": "^6.6.1",
     "prisma": "^5.13.0",
     "reflect-metadata": "^0.2.0",
     "rxjs": "^7.8.1",
