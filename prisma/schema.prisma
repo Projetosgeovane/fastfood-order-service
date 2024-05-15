@@ -5,26 +5,23 @@
 // Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
 
 generator client {
-  provider = "prisma-client-js"
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "rhel-openssl-1.0.x"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider = "mongodb"
+  url      = "mongodb+srv://geovane:Pp123456@tech-product.inlzdwb.mongodb.net/order?retryWrites=true&w=majority&appName=tech-product"
 }
 
-model Client {
-  id String @id @default(uuid())
+model Order {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  customerId  String
+  totalAmount Float
+  status      String    @default("PENDING")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime? @updatedAt @map("updated_at")
+  deletedAt   DateTime? @map("deleted_at")
 
-  name      String
-  cpf       String    @unique
-  email     String    @unique
-  phone     String
-  password  String
-  status    Boolean   @default(true)
-  createdAt DateTime  @default(now()) @map("created_at")
-  updatedAt DateTime? @updatedAt @map("updated_at")
-  deletedAt DateTime? @map("deleted_at")
-
-  @@map("clients")
+  @@map("orders")
 }
