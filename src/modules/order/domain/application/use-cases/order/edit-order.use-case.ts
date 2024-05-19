@@ -5,8 +5,6 @@ import { Either, failure, success } from 'libs/core/src/types';
 
 interface EditOrderUseCaseRequest {
   id: string;
-  customerId: string;
-  totalAmount: number;
   status: string;
 }
 
@@ -17,7 +15,6 @@ export class EditOrderUseCase {
 
   async execute({
     id,
-    customerId,
     status,
   }: EditOrderUseCaseRequest): Promise<EditOrderUseCaseResponse> {
     const order = await this.orderRepository.findById(id);

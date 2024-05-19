@@ -38,6 +38,9 @@ export class CreateOrderUseCase {
       data,
     );
 
-    return paymentLink?.data;
+    return success({
+      statusCode: 201,
+      paymentLink: paymentLink.data.paymentLink,
+    });
   }
 }

@@ -1,7 +1,7 @@
 import { Optional } from '@enablers/core/types';
 import { Entity, UniqueEntityID } from '../../../../../libs/core/src/entities';
 
-interface OrderEntityProps {
+export interface OrderEntityProps {
   customerId: string;
   totalAmount: number;
   status: string;
