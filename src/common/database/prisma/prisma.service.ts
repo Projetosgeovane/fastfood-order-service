@@ -1,5 +1,5 @@
-import { Injectable, OnModuleDestroy, OnModuleInit } from "@nestjs/common";
-import { PrismaClient } from "@prisma/client";
+import { Injectable, OnModuleDestroy, OnModuleInit } from '@nestjs/common';
+import { PrismaClient } from '@prisma/client';
 
 interface SecretDatabase {
   hostname: string;
@@ -12,15 +12,17 @@ interface SecretDatabase {
 }
 
 @Injectable()
-export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
-
+export class PrismaService
+  extends PrismaClient
+  implements OnModuleInit, OnModuleDestroy
+{
   async onModuleInit() {
     await this.$connect();
-    console.log('Connecting to database')
+    console.log('Connecting to database');
   }
 
   async onModuleDestroy() {
     await this.$disconnect();
-    console.log('Disconnecting from database')
+    console.log('Disconnecting from database');
   }
 }

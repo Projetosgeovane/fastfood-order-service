@@ -1,7 +1,7 @@
-import { Module } from "@nestjs/common";
-import { OrderRepository } from "../../application/repositories/order.repository";
-import { DatabaseModule } from "../../../../../common/database/database.module";
-import { PrismaOrderRepositoryImpl } from "./prisma/repositories/prisma-order.repository.impl";
+import { Module } from '@nestjs/common';
+import { OrderRepository } from '../../application/repositories/order.repository';
+import { DatabaseModule } from '../../../../../common/database/database.module';
+import { PrismaOrderRepositoryImpl } from './prisma/repositories/prisma-order.repository.impl';
 
 @Module({
   imports: [DatabaseModule],
@@ -9,10 +9,9 @@ import { PrismaOrderRepositoryImpl } from "./prisma/repositories/prisma-order.re
     {
       useClass: PrismaOrderRepositoryImpl,
       provide: OrderRepository,
-    }
+    },
   ],
 
   exports: [OrderRepository],
 })
-
-export class PersistenceModule { }
+export class PersistenceModule {}

@@ -1,5 +1,5 @@
-import { Optional } from "@enablers/core/types";
-import { Entity, UniqueEntityID } from "../../../../../libs/core/src/entities";
+import { Optional } from '@enablers/core/types';
+import { Entity, UniqueEntityID } from '../../../../../libs/core/src/entities';
 
 interface OrderEntityProps {
   customerId: string;
@@ -13,7 +13,7 @@ interface OrderEntityProps {
 
 export class OrderEntity extends Entity<OrderEntityProps> {
   static instance(
-    props: Optional<OrderEntityProps, | 'createdAt'>,
+    props: Optional<OrderEntityProps, 'createdAt'>,
     id?: UniqueEntityID,
   ) {
     const order = new OrderEntity(

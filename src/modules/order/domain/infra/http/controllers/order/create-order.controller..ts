@@ -1,12 +1,18 @@
-import { BadRequestException, Body, ConflictException, Controller, Post } from "@nestjs/common";
-import { CreateOrderDTO } from "../../dtos/create-order.dto";
-import { CreateOrderUseCase } from "src/modules/order/domain/application/use-cases/order/create-order.use-case";
+import {
+  BadRequestException,
+  Body,
+  ConflictException,
+  Controller,
+  Post,
+} from '@nestjs/common';
+import { CreateOrderDTO } from '../../dtos/create-order.dto';
+import { CreateOrderUseCase } from 'src/modules/order/domain/application/use-cases/order/create-order.use-case';
 
-@Controller("order")
+@Controller('fos')
 export class CreateOrderController {
-  constructor(private readonly createOrderUseCase: CreateOrderUseCase) { }
+  constructor(private readonly createOrderUseCase: CreateOrderUseCase) {}
 
-  @Post()
+  @Post('order')
   async handle(@Body() body: CreateOrderDTO) {
     const { customerId, totalAmount, status } = body;
 
@@ -16,17 +22,19 @@ export class CreateOrderController {
       status,
     });
 
-    if (result.isFailure()) {
-      const error = result.value;
+    // if (result.isFailure()) {
+    //   const error = result.value;
 
-      switch (error.constructor) {
-        case Error: {
-          throw new ConflictException(error.message);
-        }
-        default: {
-          throw new BadRequestException();
-        }
-      }
-    }
+    //   switch (error.constructor) {
+    //     case Error: {
+    //       throw new ConflictException(error.message);
+    //     }
+    //     default: {
+    //       throw new BadRequestException();
+    //     }
+    //   }
+    // }
+
+    return result;
   }
 }

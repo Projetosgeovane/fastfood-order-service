@@ -1,6 +1,6 @@
-import { Prisma, Order as PrismaOrder } from "@prisma/client";
-import { OrderEntity } from "../../../enterprise/order.entity";
-import { UniqueEntityID } from "@enablers/core/entities";
+import { Prisma, Order as PrismaOrder } from '@prisma/client';
+import { OrderEntity } from '../../../enterprise/order.entity';
+import { UniqueEntityID } from '@enablers/core/entities';
 
 export class PrismaOrderMapper {
   static toDomain(raw: PrismaOrder): OrderEntity {
@@ -19,9 +19,7 @@ export class PrismaOrderMapper {
     return order;
   }
 
-  static toPrisma(
-    order: OrderEntity,
-  ): Prisma.OrderUncheckedCreateInput {
+  static toPrisma(order: OrderEntity): Prisma.OrderUncheckedCreateInput {
     return {
       id: order.id.toValue(),
       customerId: order.customerId,

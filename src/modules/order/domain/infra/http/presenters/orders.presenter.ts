@@ -1,4 +1,4 @@
-import { OrderEntity } from "../../../enterprise/order.entity";
+import { OrderEntity } from '../../../enterprise/order.entity';
 
 export class OrdersPresenter {
   static toHTTP(order: OrderEntity) {

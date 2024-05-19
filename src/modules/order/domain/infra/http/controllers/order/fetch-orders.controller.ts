@@ -1,12 +1,18 @@
-import { BadRequestException, Controller, Get, ParseIntPipe, Query } from "@nestjs/common";
-import { OrdersPresenter } from "../../presenters/orders.presenter";
-import { FetchOrdersUseCase } from "src/modules/order/domain/application/use-cases/order/fetch-orders.use-case";
+import {
+  BadRequestException,
+  Controller,
+  Get,
+  ParseIntPipe,
+  Query,
+} from '@nestjs/common';
+import { OrdersPresenter } from '../../presenters/orders.presenter';
+import { FetchOrdersUseCase } from 'src/modules/order/domain/application/use-cases/order/fetch-orders.use-case';
 
-@Controller("order")
+@Controller('fos')
 export class FetchOrdersController {
-  constructor(private readonly fetchOrdersUseCase: FetchOrdersUseCase) { }
+  constructor(private readonly fetchOrdersUseCase: FetchOrdersUseCase) {}
 
-  @Get()
+  @Get('orders')
   async handle(@Query('page', ParseIntPipe) page: number) {
     const result = await this.fetchOrdersUseCase.execute({ page });
 
