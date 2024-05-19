@@ -1,17 +1,19 @@
-service: serverless-example
+service: fastfood-order-service
 
 plugins:
   - serverless-offline
 provider:
   name: aws
   runtime: nodejs18.x
+  apiGateway:
+    restApiId: d0ewo299u4 # ID do API Gateway existente
+    restApiRootResourceId: cbegvswvsj # ID do recurso raiz
+  timeout: 60
 functions:
   main:
     handler: dist/src/lambda.handler
     events:
       - http:
           method: ANY
-          path: /
-      - http:
-          method: ANY
-          path: '{proxy+}'
+          path: 'fos/{proxy+}'
+          cors: true

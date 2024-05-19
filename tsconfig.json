@@ -30,6 +30,8 @@
         "libs/core/src/*"
       ]
     },
-
+    "types": [
+      "vitest/globals"
+    ]
   },
 }
