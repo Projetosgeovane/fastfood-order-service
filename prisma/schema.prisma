@@ -10,14 +10,14 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
-  url      = "mongodb+srv://geovane:Pp123456@tech-product.inlzdwb.mongodb.net/order?retryWrites=true&w=majority&appName=tech-product"
+  provider = "mysql"
+  url      = env("DATABASE_URL")
 }
 
 model Order {
-  id          String    @id @default(auto()) @map("_id") @db.ObjectId
-  customerId  String
-  totalAmount Float
+  id          String    @id @default(uuid())
+  customerId  String    @map("customer_id")
+  totalAmount Float     @map("total_amount")
   status      String    @default("PENDING")
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime? @updatedAt @map("updated_at")
