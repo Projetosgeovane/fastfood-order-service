@@ -19,7 +19,6 @@ export class EditOrderController {
 
     const result = await this.editOrderUseCase.execute({
       id,
-
       status,
     });
 
