@@ -5,6 +5,9 @@ import {
   OrderEntity,
   OrderEntityProps,
 } from 'src/modules/order/domain/enterprise/order.entity';
+import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/common/database/prisma/prisma.service';
+import { PrismaOrderMapper } from 'src/modules/order/domain/infra/persistence/mappers/prisma-order.mapper';
 
 export function makeOrder(
   override: Partial<OrderEntityProps> = {},
