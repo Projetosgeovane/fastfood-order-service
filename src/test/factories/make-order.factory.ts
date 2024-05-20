@@ -22,3 +22,18 @@ export function makeOrder(
 
   return order;
 }
+
+@Injectable()
+export class OrderFactory {
+  constructor(private prisma: PrismaService) {}
+
+  async makePrismaOrder(data: Partial<OrderEntityProps> = {}) {
+    const order = makeOrder(data);
+
+    await this.prisma.order.create({
+      data: PrismaOrderMapper.toPrisma(order),
+    });
+
+    return order;
+  }
+}

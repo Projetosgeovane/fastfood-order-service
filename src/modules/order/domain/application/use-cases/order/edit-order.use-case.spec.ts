@@ -3,7 +3,7 @@ import {
   makeInMemoryRepositories,
 } from 'src/test/factories/make-in-memory-repositories.factory';
 import { EditOrderUseCase } from './edit-order.use-case';
-import { makeOrder } from 'src/test/factories/make-payment.factory';
+import { makeOrder } from 'src/test/factories/make-order.factory';
 
 describe('EditOrderUseCase', () => {
   let inMemory: InMemoryRepositoriesProps;
