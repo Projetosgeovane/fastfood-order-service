@@ -5,10 +5,15 @@ import { Injectable } from '@nestjs/common';
 import { Either, success } from '@enablers/core/types';
 import { OrdersPresenter } from '../../../infra/http/presenters/orders.presenter';
 import axios from 'axios';
+interface ProductItem {
+  title: string;
+  quantity: number;
+  unit_price: number;
+}
 interface OrderRequest {
   customerId: string;
   totalAmount: number;
-  status: string;
+  products: ProductItem[];
 }
 
 type OrderResponse = Either<ResourceExistsError, object>;
@@ -19,15 +24,13 @@ export class CreateOrderUseCase {
   async execute({
     customerId,
     totalAmount,
-    status,
+    products,
   }: OrderRequest): Promise<OrderResponse> {
     const order = OrderEntity.instance({
       customerId,
       totalAmount,
-      status,
+      status: 'PENDING',
     });
-
-    order.status = 'PENDING';
 
     const savedOrder = await this.orderRepository.create(order);
 
@@ -35,12 +38,18 @@ export class CreateOrderUseCase {
 
     const paymentLink = await axios.post(
       'https://d0ewo299u4.execute-api.us-east-1.amazonaws.com/dev/fps/payment',
-      data,
+      {
+        id: data.id,
+        customerId: data.customerId,
+        totalAmount: data.totalAmount,
+        status: data.status,
+        products,
+      },
     );
 
     return success({
       statusCode: 201,
-      paymentLink: paymentLink.data.paymentLink,
+      paymentLink: paymentLink.data.value.paymentLink,
     });
   }
 }

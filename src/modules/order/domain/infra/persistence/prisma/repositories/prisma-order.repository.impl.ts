@@ -63,9 +63,9 @@ export class PrismaOrderRepositoryImpl implements OrderRepository {
     return PrismaOrderMapper.toDomain(order);
   }
   delete(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+    throw new Error(`Method not implemented. ${id}`);
   }
   softDelete(id: string): Promise<void> {
-    throw new Error('Method not implemented.');
+    throw new Error(`Method not implemented. ${id}`);
   }
 }

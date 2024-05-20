@@ -14,26 +14,26 @@ export class CreateOrderController {
 
   @Post('order')
   async handle(@Body() body: CreateOrderDTO) {
-    const { customerId, totalAmount, status } = body;
+    const { customerId, totalAmount, products } = body;
 
     const result = await this.createOrderUseCase.execute({
       customerId,
       totalAmount,
-      status,
+      products,
     });
 
-    // if (result.isFailure()) {
-    //   const error = result.value;
+    if (result.isFailure()) {
+      const error = result.value;
 
-    //   switch (error.constructor) {
-    //     case Error: {
-    //       throw new ConflictException(error.message);
-    //     }
-    //     default: {
-    //       throw new BadRequestException();
-    //     }
-    //   }
-    // }
+      switch (error.constructor) {
+        case Error: {
+          throw new ConflictException(error.message);
+        }
+        default: {
+          throw new BadRequestException();
+        }
+      }
+    }
 
     return result;
   }

@@ -12,6 +12,8 @@ provider:
     restApiId: d0ewo299u4
     restApiRootResourceId: cbegvswvsj
   timeout: 60
+  environment:
+    AWS_NODEJS_CONNECTION_REUSE_ENABLED: 1
 functions:
   main:
     handler: dist/src/lambda.handler

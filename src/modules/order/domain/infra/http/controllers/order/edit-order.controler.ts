@@ -15,12 +15,11 @@ export class EditOrderController {
 
   @Put('order/:orderId')
   async handle(@Param('orderId') id: string, @Body() body: EditOrderDTO) {
-    const { customerId, totalAmount, status } = body;
+    const { status } = body;
 
     const result = await this.editOrderUseCase.execute({
       id,
-      customerId,
-      totalAmount,
+
       status,
     });
 

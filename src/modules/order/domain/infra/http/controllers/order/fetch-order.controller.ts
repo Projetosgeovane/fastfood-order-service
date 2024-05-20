@@ -1,12 +1,4 @@
-import {
-  BadRequestException,
-  Controller,
-  Get,
-  NotFoundException,
-  Param,
-  ParseIntPipe,
-  Query,
-} from '@nestjs/common';
+import { Controller, Get, NotFoundException, Param } from '@nestjs/common';
 import { OrdersPresenter } from '../../presenters/orders.presenter';
 import { FetchOrderUseCase } from 'src/modules/order/domain/application/use-cases/order/fetch-order.use-case';
 
@@ -18,7 +10,7 @@ export class FetchOrderController {
     const result = await this.fetchOrderUseCase.execute({ id });
 
     if (result.isFailure()) {
-      throw new BadRequestException();
+      throw new NotFoundException();
     }
 
     const orders = OrdersPresenter.toHTTP(result.value.order);
