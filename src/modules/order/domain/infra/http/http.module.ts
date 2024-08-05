@@ -8,10 +8,12 @@ import { CreateOrderUseCase } from '../../application/use-cases/order/create-ord
 import { FetchOrderUseCase } from '../../application/use-cases/order/fetch-order.use-case';
 import { EditOrderUseCase } from '../../application/use-cases/order/edit-order.use-case';
 import { FetchOrdersUseCase } from '../../application/use-cases/order/fetch-orders.use-case';
+import { OrderMessageController } from './controllers/order/order-message.controller';
 
 @Module({
   imports: [PersistenceModule],
   controllers: [
+    OrderMessageController,
     CreateOrderController,
     FetchOrdersController,
     FetchOrderController,
@@ -24,4 +26,4 @@ import { FetchOrdersUseCase } from '../../application/use-cases/order/fetch-orde
     EditOrderUseCase,
   ],
 })
-export class HttpModule {}
+export class HttpModule { }
