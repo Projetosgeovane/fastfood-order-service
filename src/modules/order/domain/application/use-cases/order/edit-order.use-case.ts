@@ -11,7 +11,7 @@ interface EditOrderUseCaseRequest {
 type EditOrderUseCaseResponse = Either<ResourceNotFoundError, object>;
 @Injectable()
 export class EditOrderUseCase {
-  constructor(private readonly orderRepository: OrderRepository) {}
+  constructor(private readonly orderRepository: OrderRepository) { }
 
   async execute({
     id,

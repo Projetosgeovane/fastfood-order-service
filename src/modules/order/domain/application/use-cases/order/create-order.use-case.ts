@@ -1,7 +1,7 @@
 import { ResourceExistsError } from '@enablers/core/errors';
 import { OrderEntity } from '../../../enterprise/order.entity';
 import { OrderRepository } from '../../repositories/order.repository';
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable } from '@nestjs/common';
 import { Either, success } from '@enablers/core/types';
 import { OrdersPresenter } from '../../../infra/http/presenters/orders.presenter';
 import axios from 'axios';
@@ -26,7 +26,11 @@ type OrderResponse = Either<ResourceExistsError, object>;
 export class CreateOrderUseCase {
   private client: ClientProxy;
 
-  constructor(private readonly orderRepository: OrderRepository) {
+  constructor(
+    private readonly orderRepository: OrderRepository,
+    @Inject('ORCHESTRATOR_SERVICE')
+    private readonly orchestratorClient: ClientProxy,
+  ) {
     this.client = ClientProxyFactory.create({
       transport: Transport.RMQ,
       options: {
@@ -37,6 +41,10 @@ export class CreateOrderUseCase {
         },
       },
     });
+  }
+
+  async onModuleInit() {
+    this.orchestratorClient.connect();
   }
 
   async execute({
@@ -67,15 +75,7 @@ export class CreateOrderUseCase {
     );
 
     // Enviar mensagem para o RabbitMQ
-    this.client
-      .emit('order_created', {
-        orderId: savedOrder.id,
-        customerId: savedOrder.customerId,
-        status: savedOrder.status,
-        totalAmount: savedOrder.totalAmount,
-        products,
-      })
-      .toPromise();
+    this.orchestratorClient.emit('orderCreated', { orderId: data.id });
 
     return success({
       statusCode: 201,
