@@ -3,7 +3,7 @@ import {
   makeInMemoryRepositories,
 } from 'src/test/factories/make-in-memory-repositories.factory';
 import { FetchOrdersUseCase } from './fetch-orders.use-case';
-import { makeOrder } from 'src/test/factories/make-payment.factory';
+import { makeOrder } from 'src/test/factories/make-order.factory';
 
 describe('FetchNetworksUseCase', () => {
   let inMemory: InMemoryRepositoriesProps;

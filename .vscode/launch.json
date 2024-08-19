@@ -5,8 +5,12 @@
       "name": "Run yarn start:dev",
       "request": "launch",
       "type": "node-terminal"
-    }
-
-
+    },
+    {
+      "command": "yarn test:cov",
+      "name": "Run yarn test:cov",
+      "request": "launch",
+      "type": "node-terminal"
+    },
   ]
 }
